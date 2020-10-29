@@ -14,6 +14,8 @@ WARNING:
 
 -->
 
+**Note:** this is the "per-architecture" repository for the `ppc64le` builds of [the `archlinux` official image](https://hub.docker.com/_/archlinux) -- for more information, see ["Architectures other than amd64?" in the official images documentation](https://github.com/docker-library/official-images#architectures-other-than-amd64) and ["An image's source changed in Git, now what?" in the official images FAQ](https://github.com/docker-library/faq#an-images-source-changed-in-git-now-what).
+
 # Quick reference
 
 -	**Maintained by**:  
@@ -24,7 +26,9 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`latest`, `20200908`](https://github.com/archlinux/archlinux-docker/blob/8b34d7582a2a8e7501063e7e4097550c6d9cf637/Dockerfile)
+**WARNING:** THIS IMAGE *IS NOT SUPPORTED* ON THE `ppc64le` ARCHITECTURE
+
+[![ppc64le/archlinux build status badge](https://img.shields.io/jenkins/s/https/doi-janky.infosiftr.net/job/multiarch/job/ppc64le/job/archlinux.svg?label=ppc64le/archlinux%20%20build%20job)](https://doi-janky.infosiftr.net/job/multiarch/job/ppc64le/job/archlinux/)
 
 # Quick reference (cont.)
 
@@ -57,7 +61,7 @@ Our strong community is diverse and helpful, and we pride ourselves on the range
 
 # About this image
 
-The base filesystem tarball for this image is auto-generated in Arch Linux infrastructure at the beginning of each month. Given the rolling-release nature of Arch Linux, images are tagged with the timestamp of the date they were generated. For example, `archlinux:20191006` was generated the Sixth of October of 2019. The latest tag will contain the latest build always.
+The base filesystem tarball for this image is auto-generated in Arch Linux infrastructure at the beginning of each month. Given the rolling-release nature of Arch Linux, images are tagged with the timestamp of the date they were generated. For example, `ppc64le/archlinux:20191006` was generated the Sixth of October of 2019. The latest tag will contain the latest build always.
 
 This image is intended to serve the following goals:
 
