@@ -14,6 +14,8 @@ WARNING:
 
 -->
 
+**Note:** this is the "per-architecture" repository for the `arm32v5` builds of [the `drupal` official image](https://hub.docker.com/_/drupal) -- for more information, see ["Architectures other than amd64?" in the official images documentation](https://github.com/docker-library/official-images#architectures-other-than-amd64) and ["An image's source changed in Git, now what?" in the official images FAQ](https://github.com/docker-library/faq#an-images-source-changed-in-git-now-what).
+
 # Quick reference
 
 -	**Maintained by**:  
@@ -24,18 +26,10 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`9.0.7-apache-buster`, `9.0-apache-buster`, `9-apache-buster`, `apache-buster`, `9.0.7-apache`, `9.0-apache`, `9-apache`, `apache`, `9.0.7`, `9.0`, `9`, `latest`](https://github.com/docker-library/drupal/blob/06872ee93dd032db13fa34b6cb868f8cf3b7f6d1/9.0/apache-buster/Dockerfile)
--	[`9.0.7-fpm-buster`, `9.0-fpm-buster`, `9-fpm-buster`, `fpm-buster`, `9.0.7-fpm`, `9.0-fpm`, `9-fpm`, `fpm`](https://github.com/docker-library/drupal/blob/06872ee93dd032db13fa34b6cb868f8cf3b7f6d1/9.0/fpm-buster/Dockerfile)
--	[`9.0.7-fpm-alpine3.12`, `9.0-fpm-alpine3.12`, `9-fpm-alpine3.12`, `fpm-alpine3.12`, `9.0.7-fpm-alpine`, `9.0-fpm-alpine`, `9-fpm-alpine`, `fpm-alpine`](https://github.com/docker-library/drupal/blob/06872ee93dd032db13fa34b6cb868f8cf3b7f6d1/9.0/fpm-alpine3.12/Dockerfile)
--	[`8.9.7-apache-buster`, `8.9-apache-buster`, `8-apache-buster`, `8.9.7-apache`, `8.9-apache`, `8-apache`, `8.9.7`, `8.9`, `8`](https://github.com/docker-library/drupal/blob/b69c0e44c53c1634a5b29f0a3babfbca2891de6b/8.9/apache-buster/Dockerfile)
--	[`8.9.7-fpm-buster`, `8.9-fpm-buster`, `8-fpm-buster`, `8.9.7-fpm`, `8.9-fpm`, `8-fpm`](https://github.com/docker-library/drupal/blob/b69c0e44c53c1634a5b29f0a3babfbca2891de6b/8.9/fpm-buster/Dockerfile)
--	[`8.9.7-fpm-alpine3.12`, `8.9-fpm-alpine3.12`, `8-fpm-alpine3.12`, `8.9.7-fpm-alpine`, `8.9-fpm-alpine`, `8-fpm-alpine`](https://github.com/docker-library/drupal/blob/b69c0e44c53c1634a5b29f0a3babfbca2891de6b/8.9/fpm-alpine3.12/Dockerfile)
--	[`8.8.10-apache-buster`, `8.8-apache-buster`, `8.8.10-apache`, `8.8-apache`, `8.8.10`, `8.8`](https://github.com/docker-library/drupal/blob/1781a47e9d6161e504787e5d2b26fae6117a4751/8.8/apache-buster/Dockerfile)
--	[`8.8.10-fpm-buster`, `8.8-fpm-buster`, `8.8.10-fpm`, `8.8-fpm`](https://github.com/docker-library/drupal/blob/1781a47e9d6161e504787e5d2b26fae6117a4751/8.8/fpm-buster/Dockerfile)
--	[`8.8.10-fpm-alpine3.12`, `8.8-fpm-alpine3.12`, `8.8.10-fpm-alpine`, `8.8-fpm-alpine`](https://github.com/docker-library/drupal/blob/1781a47e9d6161e504787e5d2b26fae6117a4751/8.8/fpm-alpine3.12/Dockerfile)
 -	[`7.73-apache-buster`, `7-apache-buster`, `7.73-apache`, `7-apache`, `7.73`, `7`](https://github.com/docker-library/drupal/blob/f7ea123550cfbf2c85b7bae6cbb545e9a6273935/7/apache-buster/Dockerfile)
 -	[`7.73-fpm-buster`, `7-fpm-buster`, `7.73-fpm`, `7-fpm`](https://github.com/docker-library/drupal/blob/f7ea123550cfbf2c85b7bae6cbb545e9a6273935/7/fpm-buster/Dockerfile)
--	[`7.73-fpm-alpine3.12`, `7-fpm-alpine3.12`, `7.73-fpm-alpine`, `7-fpm-alpine`](https://github.com/docker-library/drupal/blob/f7ea123550cfbf2c85b7bae6cbb545e9a6273935/7/fpm-alpine3.12/Dockerfile)
+
+[![arm32v5/drupal build status badge](https://img.shields.io/jenkins/s/https/doi-janky.infosiftr.net/job/multiarch/job/arm32v5/job/drupal.svg?label=arm32v5/drupal%20%20build%20job)](https://doi-janky.infosiftr.net/job/multiarch/job/arm32v5/job/drupal/)
 
 # Quick reference (cont.)
 
@@ -69,13 +63,13 @@ Drupal is a free and open-source content-management framework written in PHP and
 The basic pattern for starting a `drupal` instance is:
 
 ```console
-$ docker run --name some-drupal -d drupal
+$ docker run --name some-drupal -d arm32v5/drupal
 ```
 
 If you'd like to be able to access the instance from the host without the container's IP, standard port mappings can be used:
 
 ```console
-$ docker run --name some-drupal -p 8080:80 -d drupal
+$ docker run --name some-drupal -p 8080:80 -d arm32v5/drupal
 ```
 
 Then, access it via `http://localhost:8080` or `http://host-ip:8080` in a browser.
@@ -129,7 +123,7 @@ There is consensus that `/var/www/html/modules`, `/var/www/html/profiles`, and `
 If using bind-mounts, one way to accomplish pre-seeding your local `sites` directory would be something like the following:
 
 ```console
-$ docker run --rm drupal tar -cC /var/www/html/sites . | tar -xC /path/on/host/sites
+$ docker run --rm arm32v5/drupal tar -cC /var/www/html/sites . | tar -xC /path/on/host/sites
 ```
 
 This can then be bind-mounted into a new container:
@@ -140,20 +134,20 @@ $ docker run --name some-drupal --network some-network -d \
 	-v /path/on/host/profiles:/var/www/html/profiles \
 	-v /path/on/host/sites:/var/www/html/sites \
 	-v /path/on/host/themes:/var/www/html/themes \
-	drupal
+	arm32v5/drupal
 ```
 
 Another solution using Docker Volumes:
 
 ```console
 $ docker volume create drupal-sites
-$ docker run --rm -v drupal-sites:/temporary/sites drupal cp -aRT /var/www/html/sites /temporary/sites
+$ docker run --rm -v drupal-sites:/temporary/sites arm32v5/drupal cp -aRT /var/www/html/sites /temporary/sites
 $ docker run --name some-drupal --network some-network -d \
 	-v drupal-modules:/var/www/html/modules \
 	-v drupal-profiles:/var/www/html/profiles \
 	-v drupal-sites:/var/www/html/sites \
 	-v drupal-themes:/var/www/html/themes \
-	drupal
+	arm32v5/drupal
 ```
 
 ## ... via [`docker stack deploy`](https://docs.docker.com/engine/reference/commandline/stack_deploy/) or [`docker-compose`](https://github.com/docker/compose)
@@ -218,15 +212,15 @@ See [the "Running as an arbitrary user" section of the `php` image documentation
 
 # Image Variants
 
-The `drupal` images come in many flavors, each designed for a specific use case.
+The `arm32v5/drupal` images come in many flavors, each designed for a specific use case.
 
-## `drupal:<version>`
+## `arm32v5/drupal:<version>`
 
 This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
 
 Some of these tags may have names like buster in them. These are the suite code names for releases of [Debian](https://wiki.debian.org/DebianReleases) and indicate which release the image is based on. If your image needs to install any additional packages beyond what comes with the image, you'll likely want to specify one of these explicitly to minimize breakage when there are new releases of Debian.
 
-## `drupal:<version>-fpm`
+## `arm32v5/drupal:<version>-fpm`
 
 This variant contains PHP-FPM, which is a FastCGI implementation for PHP. See [the PHP-FPM website](https://php-fpm.org/) for more information about PHP-FPM.
 
